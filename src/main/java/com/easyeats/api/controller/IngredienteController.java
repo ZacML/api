@@ -1,7 +1,7 @@
 package com.easyeats.api.controller;
 
-import com.easyeats.api.dto.EstoqueDto;
-import com.easyeats.api.service.EstoqueService;
+import com.easyeats.api.dto.IngredienteDto;
+import com.easyeats.api.service.IngredienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/estoques")
+@RequestMapping("/ingredientes")
 @RequiredArgsConstructor
-public class EstoqueController {
+public class IngredienteController {
 
-    private final EstoqueService estoqueService;
+    private final IngredienteService ingredienteService;
 
     @PostMapping
-    public ResponseEntity<EstoqueDto> criar(@RequestBody EstoqueDto estoque) {
-        EstoqueDto salvo = estoqueService.salvar(estoque);
+    public ResponseEntity<IngredienteDto> criar(@RequestBody IngredienteDto ingrediente) {
+        IngredienteDto salvo = ingredienteService.salvar(ingrediente);
 
         if (salvo == null) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -28,42 +28,42 @@ public class EstoqueController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EstoqueDto>> listarTodos() {
-        List<EstoqueDto> estoques = estoqueService.listarTodos();
+    public ResponseEntity<List<IngredienteDto>> listarTodos() {
+        List<IngredienteDto> ingredientes = ingredienteService.listarTodos();
 
-        if (estoques.isEmpty()) {
+        if (ingredientes.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(estoques);
+        return ResponseEntity.status(HttpStatus.OK).body(ingredientes);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EstoqueDto> buscarPorId(@PathVariable Long id) {
-        return estoqueService.buscarPorId(id)
+    public ResponseEntity<IngredienteDto> buscarPorId(@PathVariable Long id) {
+        return ingredienteService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/ingrediente/{idIngrediente}")
-    public ResponseEntity<EstoqueDto> buscarPorIngrediente(@PathVariable Long idIngrediente) {
-        return estoqueService.buscarPorIngrediente(idIngrediente)
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<IngredienteDto> buscarPorNome(@PathVariable String nome) {
+        return ingredienteService.buscarPorNome(nome)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
-        estoqueService.excluir(id);
+        ingredienteService.excluir(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EstoqueDto> alterar(
+    public ResponseEntity<IngredienteDto> alterar(
             @PathVariable Long id,
-            @RequestBody EstoqueDto estoque) {
+            @RequestBody IngredienteDto ingrediente) {
 
-        EstoqueDto modificado = estoqueService.alterar(id, estoque);
+        IngredienteDto modificado = ingredienteService.alterar(id, ingrediente);
 
         if (modificado == null) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

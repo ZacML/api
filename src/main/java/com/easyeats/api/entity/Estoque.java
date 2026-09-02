@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "tb_estoque")
+@Table(name = "tb_estoques")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Estoque {
@@ -21,5 +21,9 @@ public class Estoque {
     private Integer qtdAtual;
     private Integer qtdMinima;
     private LocalDate dtAtualizacao;
+
+    @OneToOne
+    @JoinColumn(name = "ingrediente_id", unique = true)
+    private Ingrediente ingrediente;
 
 }
