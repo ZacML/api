@@ -24,12 +24,7 @@ public class Produto {
     private String data_alteracao;
     private String flativo;
 
-    @ManyToMany
-    @JoinTable(
-            name = "produto_ingrediente",
-            joinColumns = @JoinColumn(name = "produto_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingrediente_id")
-    )
-    private List<Ingrediente> ingredientes = new ArrayList<>();
+    @OneToMany(mappedBy = "produto")
+    private List<ProdutoIngrediente> ingredientes = new ArrayList<>();
 
 }

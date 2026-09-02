@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "tb_ingredientes")
@@ -23,5 +26,8 @@ public class Ingrediente {
 
     @OneToOne(mappedBy = "ingrediente", cascade = CascadeType.ALL)
     private Estoque estoque;
+
+    @OneToMany(mappedBy = "ingrediente")
+    private List<ProdutoIngrediente> produtos = new ArrayList<>();
 
 }
