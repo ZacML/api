@@ -1,4 +1,7 @@
 package com.easyeats.api.repository;
 
-public interface ProdutoRepository {
+import com.easyeats.api.entity.Produto;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 }
