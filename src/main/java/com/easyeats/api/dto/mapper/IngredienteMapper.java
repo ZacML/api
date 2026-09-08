@@ -12,6 +12,7 @@ public class IngredienteMapper {
         }
 
         return new IngredienteDto(
+                ingrediente.getId(),
                 ingrediente.getNome(),
                 ingrediente.getUnidadeMedida()
         );

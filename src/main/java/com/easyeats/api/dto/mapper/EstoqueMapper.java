@@ -21,6 +21,7 @@ public class EstoqueMapper {
         }
 
         return new EstoqueDto(
+                estoque.getId(),
                 estoque.getQtdAtual(),
                 estoque.getQtdMinima(),
                 estoque.getDtAtualizacao(),
