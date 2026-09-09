@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +21,25 @@ public class Produto {
     private Long id;
     private String nome;
     private String descricao;
-    private String data_criacao;
-    private String data_alteracao;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime dataCriacao;
+
+    private LocalDateTime dataAlteracao;
     private String flativo;
 
     @OneToMany(mappedBy = "produto")
     private List<ProdutoIngrediente> ingredientes = new ArrayList<>();
+
+    @PrePersist
+    public void antesDeCriar() {
+        dataCriacao = LocalDateTime.now();
+        dataAlteracao = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void antesDeAtualizar() {
+        dataAlteracao = LocalDateTime.now();
+    }
 
 }
