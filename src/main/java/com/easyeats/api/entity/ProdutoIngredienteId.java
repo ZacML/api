@@ -1,4 +1,4 @@
-package com.easyeats.api.repository;
+package com.easyeats.api.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

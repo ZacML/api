@@ -1,7 +1,5 @@
 package com.easyeats.api.entity;
 
-import com.easyeats.api.repository.ProdutoIngredienteId;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
