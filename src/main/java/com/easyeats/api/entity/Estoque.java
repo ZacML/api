@@ -5,8 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -18,12 +17,31 @@ public class Estoque {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer qtdAtual;
-    private Integer qtdMinima;
-    private LocalDate dtAtualizacao;
 
-    @OneToOne
-    @JoinColumn(name = "ingrediente_id", unique = true)
+    @Column(nullable = false)
+    private Integer qtdAtual;
+
+    @Column(nullable = false)
+    private Integer qtdMinima;
+
+    @Column(nullable = false)
+    private LocalDateTime dtAtualizacao;
+
+    @OneToOne(optional = false)
+    @JoinColumn(
+            name = "ingrediente_id",
+            nullable = false,
+            unique = true
+    )
     private Ingrediente ingrediente;
 
+    @PrePersist
+    public void antesDeCriar() {
+        dtAtualizacao = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void antesDeAtualizar() {
+        dtAtualizacao = LocalDateTime.now();
+    }
 }

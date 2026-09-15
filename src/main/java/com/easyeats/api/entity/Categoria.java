@@ -5,15 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "tb_ingrediente")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ingrediente {
+@Table(name = "tb_categoria")
+public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,21 +22,12 @@ public class Ingrediente {
     private String nome;
 
     @Column(nullable = false)
-    private String unidadeMedida;
-
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal custo;
-
-    @Column(nullable = false, length = 1)
     private String flativo;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime dataCriacao;
 
     private LocalDateTime dataAlteracao;
-
-    @OneToOne(mappedBy = "ingrediente")
-    private Estoque estoque;
 
     @PrePersist
     public void antesDeCriar() {

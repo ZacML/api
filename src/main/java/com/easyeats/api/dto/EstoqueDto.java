@@ -1,21 +1,24 @@
 package com.easyeats.api.dto;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record EstoqueDto(
+
         Long id,
-        @NotBlank(message = "A quantidade atual é obrigatória.")
-        @Min(value = 0, message = "A quantidade atual não pode ser menor que zero")
+
+        @NotNull(message = "A quantidade atual é obrigatória")
         Integer qtdAtual,
-        @NotBlank(message = "A quantidade mínima é obrigatória.")
-        @Min(value = 1, message = "A quantidade mínima deve ser maior que zero.")
+
+        @NotNull(message = "A quantidade mínima é obrigatória")
         Integer qtdMinima,
-        LocalDate dtAtualizacao,
-        @NotNull(message = "O ingrediente é obrigatório") Long idIngrediente,
+
+        LocalDateTime dtAtualizacao,
+
+        Long idIngrediente,
+
         String nomeIngrediente
+
 ) {
 }

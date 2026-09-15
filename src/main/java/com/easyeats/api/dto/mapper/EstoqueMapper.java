@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class EstoqueMapper {
 
     public EstoqueDto toDto(Estoque estoque) {
+
         if (estoque == null) {
             return null;
         }
@@ -31,6 +32,7 @@ public class EstoqueMapper {
     }
 
     public Estoque toEntity(EstoqueDto dto) {
+
         if (dto == null) {
             return null;
         }
@@ -39,9 +41,7 @@ public class EstoqueMapper {
 
         estoque.setQtdAtual(dto.qtdAtual());
         estoque.setQtdMinima(dto.qtdMinima());
-        estoque.setDtAtualizacao(dto.dtAtualizacao());
 
         return estoque;
     }
-
 }
